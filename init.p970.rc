@@ -1,0 +1,25 @@
+on fs
+# mount partitions
+    mount ext3 /dev/block/mmcblk0p8 /system noatime nodiratime
+    mount ext3 /dev/block/mmcblk0p8 /system ro remount
+    # We chown/chmod /data again so because mount is run as root + defaults
+    mount ext3 /dev/block/mmcblk0p9 /data nosuid nodev noatime nodiratime
+    mount ext3 /dev/block/mmcblk0p10 /cache nosuid nodev noatime nodiratime
+
+
+on post-fs
+    mount rootfs rootfs / rw remount
+
+ 
+# Create mountpoints and mount tmpfs
+    mkdir /pds 0775 system system
+    mkdir /tmp 0777 system system
+    mount tmpfs tmpfs /tmp size=2m
+
+# Configure kernel options
+
+
+# Create basic filesystem structure
+
+    mount rootfs rootfs / ro remount
+
